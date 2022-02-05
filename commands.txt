@@ -1,0 +1,25 @@
+###
+POST http://localhost:8080/api/v1/student
+Content-Type: application/json
+
+{
+"name": "Butter",
+"email": "butter@gmail.com",
+"dob": "2018-01-10"
+}
+
+<> 2022-02-04T160639.500.json
+<> 2022-02-04T160532.500.json
+<> 2022-02-04T160426.500.json
+
+###
+DELETE http://localhost:8080/api/v1/student/1
+
+<> 2022-02-04T161426.500.json
+<> 2022-02-04T161300.404.json
+
+###
+PUT http://localhost:8080/api/v1/student/3?email=buttersoni@gmail.com&name=Butter Soni
+
+<> 2022-02-04T164038.500.json
+<> 2022-02-04T163840.405.json
