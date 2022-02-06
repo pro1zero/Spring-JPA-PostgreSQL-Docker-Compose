@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  API:
+    image: pro1zero/spring:latest
+    container_name: springJPACont
+    build:
+      context: .
+      dockerfile: app.build
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgreSQL:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://PostgreSQL:5432/student
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+
+  postgreSQL:
+    image: pro1zero/postgres:latest
+    container_name: postgresCont
+    build:
+      context: .
+      dockerfile: postgres.build
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=student
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
